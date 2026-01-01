@@ -1,0 +1,13 @@
+module.exports = ({ userService }) => ({
+  async register(req, res) {
+    try {
+      const user = await userService.registerUser(req.body);
+      res.json({ success: true, user });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(error.status || 500)
+        .json({ success: false, error: error.message ? error.message : 'Internal server error' });
+    }
+  },
+});
