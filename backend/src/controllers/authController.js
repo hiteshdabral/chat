@@ -13,8 +13,8 @@ module.exports = ({ userService }) => ({
 
   async login(req, res) {
     try {
-      const user = await userService.loginUser(req.body);
-      res.json({ success: true, user });
+      const userLoginData = await userService.loginUser(req.body);
+      res.json({ success: true, userLoginData });
     } catch (error) {
       console.log(error);
       res

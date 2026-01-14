@@ -1,9 +1,17 @@
 module.exports = ({ models }) => {
   const User = models.User;
-  this.at;
   return {
     create(data) {
       return User.create(data);
+    },
+    update(id, data) {
+      return User.update(data, {
+        where: { id },
+      });
+    },
+
+    findById(id) {
+      return User.findByPk(id);
     },
 
     findByEmail(email) {

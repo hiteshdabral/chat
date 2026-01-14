@@ -26,6 +26,13 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING(100),
       },
+      key: {
+        type: DataTypes.STRING(100),
+      },
+      keyExpiry: {
+        type: DataTypes.STRING(100),
+        field: 'key_expiry',
+      },
     },
     {
       sequelize,
