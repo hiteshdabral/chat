@@ -24,8 +24,7 @@ module.exports = (sequelize) => {
         unique: true,
       },
       password: {
-        type: DataTypes.STRING(50),
-        unique: true,
+        type: DataTypes.STRING(100),
       },
     },
     {
@@ -63,6 +62,10 @@ module.exports = (sequelize) => {
       },
     }
   );
+
+  User.prototype.comparePassword = async function (plainPassword) {
+    return bcrypt.compare(plainPassword, this.password);
+  };
 
   return User;
 };

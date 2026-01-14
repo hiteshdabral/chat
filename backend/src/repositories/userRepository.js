@@ -9,5 +9,11 @@ module.exports = ({ models }) => {
     findByEmail(email) {
       return User.findOne({ where: { email }, attributes: ['id'], raw: true });
     },
+
+    findForAuth(email) {
+      return User.scope('withPassword').findOne({
+        where: { email },
+      });
+    },
   };
 };
