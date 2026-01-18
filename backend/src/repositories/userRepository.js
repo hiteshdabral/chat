@@ -23,5 +23,9 @@ module.exports = ({ models }) => {
         where: { email },
       });
     },
+
+    findByIdForAuth(id) {
+      return User.scope('withPassword').findByPk(id);
+    },
   };
 };

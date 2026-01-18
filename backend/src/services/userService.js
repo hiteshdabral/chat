@@ -27,7 +27,6 @@ module.exports = ({ userRepository }) => ({
     if (isKeyExpired(user.keyExpiry)) {
       const { key, keyExpiry } = generateKey();
       await userRepository.update(user.id, { key, keyExpiry });
-      signToken(user, user.key);
     }
     const accesstoken = await signToken({ id: user.id, key: user.key }, 15 * 60);
     const refreshtoken = await signToken({ id: user.id, key: user.key }, 7 * 24 * 60 * 60);
@@ -36,8 +35,19 @@ module.exports = ({ userRepository }) => ({
 
     return { user, token: `JWT ${accesstoken}`, refreshtoken: `JWT ${refreshtoken}` };
   },
+  async logout(id) {
+    const { key, keyExpiry } = generateKey();
+    return userRepository.update(id, { key, keyExpiry });
+  },
 
-  async getById(id) {
-    return userRepository.findById(id);
+  async getUserById(id) {
+    let user = await userRepository.findById(id);
+    user = deleteConfedentialData(user.dataValues);
+    return user;
+  },
+
+  async getUserByIdForAuth(id) {
+    const user = await userRepository.findByIdForAuth(id);
+    return user;
   },
 });

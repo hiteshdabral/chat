@@ -1,5 +1,10 @@
 const express = require('express');
+const { makeInvoker } = require('awilix-express');
+const { requireUserAuth } = require('../middleware/authentication');
 
-const userRoutesV1 = express.Router();
+const router = express.Router();
+const api = makeInvoker(({ userController }) => userController);
 
-module.exports = { userRoutesV1 };
+router.get('/:id', requireUserAuth, api('findMe'));
+
+module.exports = { userRoutesV1: router };

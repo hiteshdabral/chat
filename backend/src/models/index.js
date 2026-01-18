@@ -9,7 +9,7 @@ module.exports = ({ sequelize }) => {
     .filter((file) => file.endsWith('.model.js'))
     .forEach((file) => {
       const model = require(path.join(__dirname, file))(sequelize);
-      console.log('mdel', model);
+      console.log('model', model);
       models[model.name] = model;
     });
 

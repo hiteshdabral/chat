@@ -42,15 +42,13 @@ module.exports = (sequelize) => {
       updatedAt: 'updated_at',
       defaultScope: {
         attributes: {
-          exclude: ['password'],
+          exclude: ['password', 'key', 'keyExpiry'],
         },
       },
       // Define a separate scope to explicitly include the password when needed (e.g., for login validation)
       scopes: {
         withPassword: {
-          attributes: {
-            include: ['password'],
-          },
+          attributes: {},
         },
       },
       hooks: {
