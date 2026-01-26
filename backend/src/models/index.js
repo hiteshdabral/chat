@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = ({ sequelize }) => {
   const models = {};
 
-  console.log(__dirname);
   fs.readdirSync(__dirname)
     .filter((file) => file.endsWith('.model.js'))
     .forEach((file) => {

@@ -1,42 +1,41 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('workspaces', {
       id: {
         type: Sequelize.UUID,
-        primaryKey: true,
         allowNull: false,
+        primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
-        required: true,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        required: true,
+      owner_id: {
+        type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true,
-      },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
     });
-
-    console.log('Created user table');
+    console.log('Created table workspaces successfully');
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
-    console.log('Dropped users table successfullly');
+    await queryInterface.dropTable('workspaces');
+    console.log('Dropped table workspaces successfully');
   },
 };

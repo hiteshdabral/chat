@@ -4,7 +4,10 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize) => {
   class User extends Model {
     static associate(models) {
-      // associations go here
+      User.hasMany(models.Workspace, {
+        foreignKey: 'owner_id',
+        as: 'workspaces',
+      });
     }
   }
 
