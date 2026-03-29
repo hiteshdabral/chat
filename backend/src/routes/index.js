@@ -2,6 +2,7 @@ const express = require('express');
 const { authRoutesV1 } = require('./authRoutes');
 const { userRoutesV1 } = require('./userRoutes');
 const { workspaceRoutesV1 } = require('./workspaceRoutes');
+const { workspaceMemberRoutesV1 } = require('./workspaceMemberRoutes');
 
 const router = (app) => {
   const v1Routes = express.Router();
@@ -9,6 +10,7 @@ const router = (app) => {
   v1Routes.use('/auth', authRoutesV1);
   v1Routes.use('/user', userRoutesV1);
   v1Routes.use('/workspace', workspaceRoutesV1);
+  v1Routes.use('/workspace-members', workspaceMemberRoutesV1);
 
   app.use('/api', v1Routes);
 
